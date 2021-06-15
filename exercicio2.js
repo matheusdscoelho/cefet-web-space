@@ -57,15 +57,12 @@ const imagens = [
 let index = 0;
 
 const carrouselImagens = (contador) => {
-  if (index + contador < 0) {
-    index = imagens.length - 1;
-  } else if (index + contador === imagens.length) {
-    index = 0;
-  } else {
-    index += contador;
-  }
+  index += contador;
+  if (index < 0) index = imagens.length - 1;
+  let currentImage = index % imagens.length;
 
   document.getElementById("slide").src =
-    servidorDasImagens + imagens[index].arquivo;
-  document.getElementById("slide").alt = imagens[index].descricao;
+    servidorDasImagens + imagens[Math.abs(currentImage)].arquivo;
+  document.getElementById("slide").alt =
+    imagens[Math.abs(currentImage)].descricao;
 };
